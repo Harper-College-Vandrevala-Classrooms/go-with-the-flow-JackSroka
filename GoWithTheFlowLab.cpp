@@ -16,10 +16,15 @@ public:
 
     void tick() {                                                                                // calculates temperature
         vector<double> newTemp = temp;
+        int j = 1;
+        newTemp[j] = temp[j] + k * (temp[j] - 2 * temp[j - 1] + temp[j - 1]);                    // calculates the section of rod where there is one nieghbor (at heat source)
 
         for (int i = 1; i < sections - 1; ++i) {
-            newTemp[i] = temp[i] + k * (temp[i + 1] - 2 * temp[i] + temp[i - 1]);
+            newTemp[i] = temp[i] + k * (temp[i + 1] - 2 * temp[i] + temp[i - 1]);                // calculates all sections of rod that have two neighbors
         }
+
+        int l = 7;
+        newTemp[l] = temp[l - 1] + l * (temp[l] - 2 * temp[l] + temp[l]);                          // calculates the section of rod where there is one nieghbor (farthest from heat source)
         temp = newTemp;
     }
 
